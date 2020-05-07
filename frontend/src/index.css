@@ -1,0 +1,25 @@
+body {
+	width: auto;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+form {
+	display: flex;
+
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+form > * {
+	width: 100vw;
+}
+form > *:not(:last-child) {
+	margin-bottom: 10px;
+}
+form > textarea {
+	height: 243px;
+}
+
+ul {
+	list-style-type: none;
+}
