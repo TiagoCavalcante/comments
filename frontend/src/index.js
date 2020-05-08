@@ -25,7 +25,7 @@ function commentList() {
 
 	return {
 		oninit: () => {
-			m.request('http://localhost:3333/comments').then(data =>
+			m.request(SERVER).then(data =>
 				data.map(element =>
 					comments[comments.length] = m(comment, {
 						name: element.name,
@@ -61,7 +61,7 @@ function newComment() {
 		body.append('name', state.name);
 		body.append('text', state.text);
 
-		m.request('http://localhost:3333/comments', {
+		m.request(SERVER, {
 			method: 'POST',
 			body: body
 		}).then(() => {
