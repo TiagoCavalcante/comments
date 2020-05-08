@@ -1,7 +1,7 @@
 # comments
 Comment system with back end made in PHP and front end made in Mithril
 
-## before init
+## Before init
 Before init you need to execute the commands bellow in the MySQL:
 ```sql
 CREATE DATABASE comments CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
@@ -38,6 +38,7 @@ And in the directory `frontend`, create the file `ENV.js` with the const `SERVER
 ```js
 const SERVER = 'http://localhost:3333/comments';
 ```
+## Initializing
 Now you can execute the back-end with the command below:
 ```
 php -S localhost:3333 index.php
