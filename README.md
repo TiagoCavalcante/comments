@@ -34,8 +34,7 @@ If you use the default password, the defalut user, and exec the MySQL in your co
 	const CORS = 'http://localhost';
 ?>
 ```
-And in the directory `frontend`, create the file `ENV.js` with the const `SERVER`.
-If you are executing the MySQL in your comuter it'll be like this:
+And in the directory `frontend`, create the file `ENV.js` with the const `SERVER`, if you are executing the MySQL in your comuter it'll be like this:
 ```js
 const SERVER = 'http://localhost:3333/comments';
 ```
