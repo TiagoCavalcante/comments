@@ -16,7 +16,7 @@
 
 		if ($text->min(1)) {
 			$connection->insert(TABLE, 'name,text', "'$name->value','$text->value'");
-			if ($connection->affectedRows())
+			if ($connection->affectedRows() > 0)
 				http_response_code(201);
 			else
 				http_response_code(409);

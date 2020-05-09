@@ -4,7 +4,7 @@
 		private $mysqli;
 
 		# constructor
-		function __construct($host = HOST, $user = USER, $password = PASSWORD, $database = DATABASE) {
+		function __construct(string $host = HOST, string $user = USER, string $password = PASSWORD, string $database = DATABASE) {
 			# connect to database or have the value of a error
 			$this->mysqli = new mysqli($host, $user, $password, $database) or die(mysqli_error());
 		}
@@ -16,15 +16,15 @@
 
 		# functions
 		# query functions
-		function select($from, $which = '*', $where = null) {
-			return ($where != null) ? $this->mysqli->query("SELECT $which FROM $from WHERE $where;") : $this->mysqli->query("SELECT $which FROM $from");
+		function select(string $from, string $what = '*', string $where = null) {
+			return ($where != null) ? $this->mysqli->query("SELECT $what FROM $from WHERE $where;") : $this->mysqli->query("SELECT $what FROM $from");
 		}
 
-		function count($from, $what, $where = null) {
-			return ($where != null) ? $this->mysqli->query("SELECT COUNT($what) FROM $from WHERE $where;") : $this->mysqli->query("SELECT COUNT($what) FROM $from");
+		function count(string $from, string $what = '*', string $where = null) {
+			return ($where != null) ? $this->mysqli->query("SELECT COUNT($what) FROM $from WHERE $where;") : $this->mysqli->query("SELECT COUNT($what) FROM $from;");
 		}
 
-		function insert($table, $what, $values) {
+		function insert(string $table, string $what, string $values) {
 			$this->mysqli->query("INSERT INTO $table ($what) VALUES ($values);");
 		}
 		# mysqli functions
@@ -36,7 +36,7 @@
 			return (gettype($result) != 'boolean') ? mysqli_num_rows($result) : false;
 		}
 
-		function prevent($value) {
+		function prevent($value) : string {
 			# to no prevent SQL injection
 			return mysqli_escape_string($this->mysqli, $value);
 		}

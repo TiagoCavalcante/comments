@@ -1,8 +1,10 @@
 <?php
-	class ValidateString {
+	abstract class Validate {
 		# vars
 		public $value;
+	}
 
+	class ValidateString extends Validate {
 		# constructor
 		function __construct(string $value) {
 			$this->value = $value;

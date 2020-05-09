@@ -1,6 +1,6 @@
 // components
 function comment() {
-	var text = [];
+	let text = [];
 
 	return {
 		oninit: props => {
@@ -21,28 +21,36 @@ function comment() {
 }
 
 function commentList() {
-	var comments = [];
+	let comments = [];
 
 	return {
 		oninit: () => {
 			m.request(SERVER).then(data =>
 				data.map(element =>
-					comments[comments.length] = m(comment, {
+					comments[comments.length] = {
 						name: element.name,
 						text: element.text
-					})
+					}
 				)
 			);
 		},
 		view: () => (
-			m('ul', [
-				comments
+			m('ul', {
+				id: 'commentList'
+			}, [
+				comments.map(element => (
+					m(comment, {
+						name: element.name,
+						text: element.text
+					})
+				))
 			])
 		)
 	}
 }
 
 function newComment() {
+	// vars
 	const state = {
 		// vars
 		name: '',
@@ -56,17 +64,30 @@ function newComment() {
 		handleInputText: e => state.text = e.target.value
 	}
 
-	function handleClick() {
-		let body = FormData();
-		body.append('name', state.name);
-		body.append('text', state.text);
+	// functions
+	function updateCommentList() {
+		let comments = [];
 
-		m.request(SERVER, {
-			method: 'POST',
-			body: body
-		}).then(() => {
-			state.clear();
-			m.mount(document.getElementById('commentList'), commentList)
+		m.request(SERVER).then(data => {
+			data.map(element =>
+				comments[comments.length] = {
+					name: element.name,
+					text: element.text.replace('\n', '<br />')
+				}
+			);
+
+			for(let i = document.getElementById('commentList').childElementCount; i < comments.length; i++) {
+				// vars
+				let comment = document.createElement('li');
+				let name = document.createElement('strong');
+
+				// TODO
+				name.innerHTML = (comments[i].name != '') ? comments[i].name : 'Anonymous';
+				comment.appendChild(name);
+				comment.innerHTML += `<br />${comments[i].text}`;
+
+				document.getElementById('commentList').appendChild(comment);
+			}
 		});
 	}
 
@@ -88,13 +109,49 @@ function newComment() {
 					}
 				}, state.text),
 				m('button', {
-					onclick: handleClick
+					onclick: async e => {
+						e.preventDefault();
+
+						if (state.name.length <= 32 && state.text.length != 0) {
+							try {
+								let body = FormData();
+								body.append('name', state.name);
+								body.append('text', state.text);
+
+								await m.request(SERVER, {
+									method: 'POST',
+									body: body
+								});
+	
+								state.clear();
+	
+								updateCommentList();
+							} catch (error) {
+								if (error.code == 409)
+									alert('Already exist a comment equal this');
+								else
+									alert(`The error code ${error.code} occurred, try again later`);
+							}
+						}
+						else
+							alert('The text of your comment must be at least 1 letter');
+					}
 				}, 'Comment')
 			])
 		)
 	}
 }
 
-// mounts
-m.mount(document.getElementById('commentList'), commentList);
-m.mount(document.getElementById('newComment'), newComment);
+function main() {
+	return {
+		view: () => (
+			m('main', [
+				m(commentList),
+				m(newComment)
+			])
+		)
+	}
+}
+
+// mount
+m.mount(document.body, main);
