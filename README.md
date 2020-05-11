@@ -7,7 +7,7 @@ Before init you need to execute the commands bellow in the MySQL:
 CREATE DATABASE comments CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 USE comments;
 CREATE TABLE comments (
-	id int AUTO_INCREMENT,
+	id INT AUTO_INCREMENT,
 	name VARCHAR(32),
 	text VARCHAR(512),
 	PRIMARY KEY(id),
