@@ -8,7 +8,7 @@
 		# connection
 	    $connection = new Connection\Connection();
 
-		$name = new ValidateString(str_replace("\r\n", "\n", $_POST['name']));
+		$name = new ValidateString($_POST['name']);
 		$text = new ValidateString(str_replace("\r\n", "\n", $_POST['text']));
 
 		if ($text->min(1)) {
