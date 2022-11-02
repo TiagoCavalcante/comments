@@ -8,11 +8,11 @@ Before init you need to:
   CREATE DATABASE comments CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
   USE comments;
   CREATE TABLE comments (
-  	id INT AUTO_INCREMENT,
-  	name VARCHAR(32),
-  	text VARCHAR(512),
-  	PRIMARY KEY(id),
-  	UNIQUE(text)
+    id INT AUTO_INCREMENT,
+    name VARCHAR(32),
+    text VARCHAR(512),
+    PRIMARY KEY(id),
+    UNIQUE(text)
   ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
   ```
 * in the directory `backend`:
@@ -27,16 +27,16 @@ Before init you need to:
     If you use the default password, the defalut user, and exec the MySQL in your computer, the file will be like this:
     ```php
     <?php
-    	putenv('name=mysql');
-    	putenv('host=localhost');
-    	putenv('port=3306');
-    	putenv('user=root');
-    	putenv('password=');
-    	putenv('database=comments');
-    	putenv('CORS=http://localhost');
+      putenv('name=mysql');
+      putenv('host=localhost');
+      putenv('port=3306');
+      putenv('user=root');
+      putenv('password=');
+      putenv('database=comments');
+      putenv('CORS=http://localhost');
     ?>
     ```
-	install dependencies: `composer install`
+  install dependencies: `composer install`
 * in the directory `frontend`:
   * create the file `env.js` with the const `SERVER`, if you are executing the MySQL in your comuter it'll be like this:
   ```js

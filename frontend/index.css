@@ -1,31 +1,31 @@
 body {
-	max-width: 500px;
-	width: 90%;
-	margin: 0 auto;
+  max-width: 500px;
+  width: 90%;
+  margin: 0 auto;
 }
 
 form {
-	display: flex;
+  display: flex;
 
-	justify-content: space-around;
-	flex-wrap: wrap;
-	margin-bottom: 20px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 input, textarea, button {
-	width: 100vw;
+  width: 100vw;
 }
 form :not(:last-child) {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 textarea {
-	height: 76vh;
-	resize: none;
+  height: 76vh;
+  resize: none;
 }
 
 ul {
-	list-style-type: none;
+  list-style-type: none;
 }
 
 ul li:not(:last-child) {
-	margin-bottom: 15px;
+  margin-bottom: 15px;
 }

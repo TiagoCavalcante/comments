@@ -1,25 +1,25 @@
 <?php
-	# includes
-	require_once __DIR__ . '/../vendor/autoload.php';
+  # includes
+  require_once __DIR__ . '/../vendor/autoload.php';
 
-	# global vars
-	$response = [];
+  # global vars
+  $response = [];
 
-	# connection
-	$connection = new Connection\Connection();
+  # connection
+  $connection = new Connection\Connection();
 
-	# TODO
-	foreach ($connection->select('comments', ['name', 'text']) as $result) {
-		$response[] = [
-			'name' => $result['name'],
-			'text' => $result['text']
-		];
-	}
+  # TODO
+  foreach ($connection->select('comments', ['name', 'text']) as $result) {
+    $response[] = [
+      'name' => $result['name'],
+      'text' => $result['text']
+    ];
+  }
 
-	# close connection
-	$connection->close();
+  # close connection
+  $connection->close();
 
-	# response
-	header('Content-type: application/json');
-	echo json_encode($response);
+  # response
+  header('Content-type: application/json');
+  echo json_encode($response);
 ?>
